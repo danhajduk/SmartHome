@@ -1,7 +1,7 @@
 /**************************************************************************************
 	Device.h - Library for setting up smart home device
 	Created by Dan Hajduk on April 1, 2017
-	All rights reserved (C)
+	
 /**************************************************************************************/
 #ifndef Device_h
 #define Device_h
