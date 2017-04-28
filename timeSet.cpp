@@ -1,7 +1,6 @@
 /**************************************************************************************
 	Boiler.cpp - Library for setting up Boiler device
 	Created by Dan Hajduk on April 1, 2017
-	All rights reserved (C)
 
 	Last Modified April 1, 2017
 

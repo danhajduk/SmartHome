@@ -1,12 +1,16 @@
 /**************************************************************************************
 	Boiler.cpp - Library for setting up Boiler device
 	Created by Dan Hajduk on April 1, 2017
-	All rights reserved (C)
+	
 
 	Last Modified April 1, 2017
 
 /**************************************************************************************/
 
+#include "RF24.h"
+#include "RF24Network.h"
+#include "RF24Mesh.h"
+#include <SPI.h>
 #include "Boiler.h"
 
 Boiler::Boiler(int pin)
