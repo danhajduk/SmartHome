@@ -3,7 +3,7 @@
 	Created by Dan Hajduk on April 1, 2017
 	
 
-	Last Modified April 1, 2017
+	Last Modified April 29, 2017
 
 /**************************************************************************************/
 
@@ -193,6 +193,35 @@ void Boiler::backLight (bool On )
 	lightOn = On;
 }
 
+/***************************************************************************************
+	Class Boiler
+	void backLight (bool On ) 
+	Turns the back light on or off
+/***************************************************************************************/
 
+void Boiler::writeMesh (const void* data, uint8_t msg_type, size_t size)
+{
+if (!mesh.write( data,msg_type,size) )
+{
+	// If a write fails, check connectivity to the mesh network
+	if ( ! mesh.checkConnection() )
+	{
+		//refresh the network address
+		if (_DEBUG)  Serial.println("Renewing Address");
+		mesh.renewAddress();
+	}
+	else
+	{
+		if (_DEBUG) Serial.println("Send fail, Test OK");
+	}
+else 
+{
+	if Serial.print("Send OK: ");
+	Serial.write(CTRL,10);
+	if (_DEBUG) Serial.println(displayTimer);
+	}
+	mesh.checkConnection();
+}
+}
 
 
