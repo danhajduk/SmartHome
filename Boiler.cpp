@@ -42,13 +42,15 @@ Boiler::Boiler(int pin ,float Rev , String Last )
 	void init () 
 	Turn On Boiler
 /***************************************************************************************/
-void Boiler::init( char nodeID)
+void Boiler::init( char nodeID, bool onLevel)
 {
 	_nodeID = nodeID;
+
 	// Connect to the mesh and set Node ID
 	mesh.setNodeID(_nodeID);
 	if (_DEBUG) Serial.println(F("Connecting to the mesh..."));
 	mesh.begin();
+	dev.setOnLevel(onLevel);
 
 	// init LCD and print init data on LCD
 	myGLCD.InitLCD(60);							// Init LCD 55 contrast
@@ -195,33 +197,34 @@ void Boiler::backLight (bool On )
 
 /***************************************************************************************
 	Class Boiler
-	void backLight (bool On ) 
+	bool writeMesh (const void* data, uint8_t msg_type, size_t size)
 	Turns the back light on or off
 /***************************************************************************************/
 
-void Boiler::writeMesh (const void* data, uint8_t msg_type, size_t size)
+bool Boiler::writeMesh (const void* data, uint8_t msg_type, size_t size)
 {
-if (!mesh.write( data,msg_type,size) )
-{
-	// If a write fails, check connectivity to the mesh network
-	if ( ! mesh.checkConnection() )
+	if (!mesh.write( data,msg_type,size) )
 	{
-		//refresh the network address
-		if (_DEBUG)  Serial.println("Renewing Address");
-		mesh.renewAddress();
+		// If a write fails, check connectivity to the mesh network
+		if ( ! mesh.checkConnection() )
+		{
+			//refresh the network address
+			if (_DEBUG)  Serial.println("Renewing Address");
+			mesh.renewAddress();
+		}
+		else
+		{
+			if (_DEBUG) Serial.println("Send fail, Test OK");
+			return false;
+		}
 	}
-	else
+	else 
 	{
-		if (_DEBUG) Serial.println("Send fail, Test OK");
-	}
-else 
-{
-	if Serial.print("Send OK: ");
-	Serial.write(CTRL,10);
-	if (_DEBUG) Serial.println(displayTimer);
+		if (_DEBUG) Serial.print("Send OK: ");
+		
 	}
 	mesh.checkConnection();
-}
+	return true;
 }
 
 

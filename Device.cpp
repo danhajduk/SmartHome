@@ -2,6 +2,8 @@
 	Device.cpp - Library for setting up smart home device
 	Created by Dan Hajduk on April 1, 2017
 
+	Last Modified April 29, 2017
+
 /**************************************************************************************/
 
 #include "Arduino.h"
@@ -23,12 +25,12 @@ void Device::setDevice(int pin )
 }
 void Device::turnOn()
 {
-	digitalWrite(_pin, LOW);
+	digitalWrite(_pin, _onLevel);
 }
 
 void Device::turnOff()
 {
-	digitalWrite(_pin, HIGH);
+	digitalWrite(_pin, !_onLevel);
 }
 
 bool Device::getStat()
@@ -36,3 +38,7 @@ bool Device::getStat()
 	return ( digitalRead(_pin) );
 }
 
+void Device::setOnLevel(bool onLevel)
+{
+	_onLevel = onLevel;
+}

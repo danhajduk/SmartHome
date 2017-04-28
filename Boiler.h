@@ -12,11 +12,6 @@
 #ifndef BOILER_H_
 #define BOILER_H_
 
-// include RF24 libs
-#include "RF24.h"
-#include "RF24Network.h"
-#include "RF24Mesh.h"
-#include <SPI.h>
 
 // SmartHome Lib Includes
 #include "Device.h"
@@ -61,12 +56,13 @@ class Boiler
 		bool lightOn;
 
 		Boiler (int pin ,float Rev , String Last );
-		void init (char nodeID);
+		void init (char nodeID , bool onLevel);
 		void turnOn();
 		void turnOff();
 		void DrawSCR();
 		void updateBoiler();
 		void backLight (bool On );
+		bool writeMesh (const void* data, uint8_t msg_type, size_t size);
 };
 
 
