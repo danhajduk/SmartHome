@@ -1,7 +1,6 @@
 /**************************************************************************************
 	tSet.h - Library for seting up timer or time
 	Created by Dan Hajduk on April 1, 2017
-	All rights reserved (C)
 
 	Last Modified April 1, 2017
 
