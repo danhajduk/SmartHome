@@ -12,20 +12,39 @@
 #ifndef BOILER_H_
 #define BOILER_H_
 
+#include "RF24.h"
+#include "RF24Network.h"
+#include "RF24Mesh.h"
+#include <SPI.h>
+#include <LCD5110_Graph.h>
+#include "wifi.h"
 
 // SmartHome Lib Includes
 #include "Device.h"
 #include "TimerOne.h"
 #include "timeSet.h"
-
+#include "Arduino.h"
 
 
 class Boiler 
 {
 	
 	private:
+
 		const float _rev = 0.1;
 		const String _last = "09/04/2017";
+		// NRF24 init code
+		RF24 radio{7,8};
+		RF24Network network{radio};							// Init RF24 Network
+		RF24Mesh mesh {radio, network};						// Init RF24 Mesh
+		// LCD init code
+		const int _SCK = 7;
+		const int _MOSI = 6;
+		const int _DC = 5;
+		const int _RST = 2;
+		const int _CS = 4;
+		LCD5110 myGLCD {_SCK, _MOSI , _DC, _RST, _CS};		// Init LCD
+		
 
 		const int Tmax = 60, Tmin = 20;		// Temperature limits
 		int TempBar, Time1 ;				//

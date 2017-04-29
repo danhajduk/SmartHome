@@ -7,32 +7,16 @@
 
 /**************************************************************************************/
 
-#include "RF24.h"
-#include "RF24Network.h"
-#include "RF24Mesh.h"
-#include <SPI.h>
-
-#include <LCD5110_Graph.h>
-#include "wifi.h"
 
 #include "Boiler.h"
 
-RF24 radio(7, 8);									// Init RF24 Radio
-RF24Network network(radio);							// Init RF24 Network
-RF24Mesh mesh(radio, network);						// Init RF24 Mesh
-
-const int _SCK = 7;
-const int _MOSI = 6;
-const int _DC = 5;
-const int _RST = 2;
-const int _CS = 4;
-LCD5110 myGLCD(_SCK, _MOSI , _DC, _RST, _CS );		// Init LCD 
 extern uint8_t SmallFont[];			// Small font pointer
 extern unsigned char TinyFont[];	// Tine font pointer
 
 Boiler::Boiler(int pin ,float Rev , String Last )
 {
 	_pin = pin;
+	//RF24 radio1 (7,8);
 	dev.setDevice(_pin);					// Set Device Output (on/off)
 	turnOff();
 }
