@@ -3,8 +3,9 @@ Smart Home Devices managment
 
 This library is writen for Smart home devices using NRF24
 
-Currently supporting :
-Boiler
+Currently supporting :  
+
+* Boiler
 
 Need to be done:
 * Main Hub
