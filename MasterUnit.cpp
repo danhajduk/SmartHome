@@ -102,7 +102,9 @@ bool MasterUnit::readUnits()
 		network.peek(header);
 		network.read(header,&_data,sizeof(_data));
 
-		switch (header.type)
+		headr_stat hdrType;
+		hdrType = header.type;
+		switch (hdrType)
 		{
 			case ping :
 				if (_DEBUG) Serial.print(F("Got Ping form : "));
@@ -131,6 +133,14 @@ bool MasterUnit::readUnits()
 				network.read(header,0,0);
 				if (_DEBUG) Serial.println(header.toString());
 			break;
+			case reconect:
+			break;
+			case command:
+			break;
+			case stat:
+			break;
+			case batt:
+			break;
 		}
 
 	_printData();
@@ -138,27 +148,17 @@ bool MasterUnit::readUnits()
 	}
 }
 
-bool MasterUnit::writeMesh (const void* data, uint8_t msg_type, size_t size)
+bool MasterUnit::writeMesh (const void* data, uint8_t msg_type, size_t size, char node)
 /***************************************************************************************
 	Class MasterUnit
 	bool writeMesh (const void* data, uint8_t msg_type, size_t size)
 	Write to mesh
 /***************************************************************************************/
 {
-	if (!mesh.write( data,msg_type,size) )
+	if (!mesh.write(node,data,msg_type,size) )
 	{
-		// If a write fails, check connectivity to the mesh network
-		if ( ! mesh.checkConnection() )
-		{
-			//refresh the network address
-			if (_DEBUG)  Serial.println("Renewing Address");
-			mesh.renewAddress();
-		}
-		else
-		{
-			if (_DEBUG) Serial.println("Send fail, Test OK");
-			return false;
-		}
+		mesh.checkConnection();
+		
 	}
 	else
 	{
@@ -169,3 +169,22 @@ bool MasterUnit::writeMesh (const void* data, uint8_t msg_type, size_t size)
 	return true;
 }
 
+bool MasterUnit::sendCMD(char nodeID , char cmd)
+/***************************************************************************************
+	Class MasterUnit
+	void sendCMD (char nodeID , char cmd)
+	Send command to node
+/***************************************************************************************/
+{
+	writeMesh(cmd,command,sizeof(char),nodeID);
+}
+
+bool MasterUnit::checkDev(char nodeID)
+/***************************************************************************************
+	Class MasterUnit
+	bool checkDev (char nodeID)
+	Check if the device is connected
+/***************************************************************************************/
+{
+	writeMesh(00,ping,1,nodeID);
+}

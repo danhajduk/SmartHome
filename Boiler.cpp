@@ -92,10 +92,6 @@ void Boiler:: DrawSCR()
 	//backLight(true);
 	if (boilerTime.isSet)
 	{
-		//myGLCD.setFont(SmallFont);
-		//if (_animation) myGLCD.print("((((((",30,25); else myGLCD.print("))))))",30,25);
-		//if (_animation) myGLCD.print("))))))",30,30); else myGLCD.print("((((((",30,30);
-		//myGLCD.drawRect(30, 35, 65, 37);
 		_animation = !_animation;
 		int x1 = 38;
 		int y1 = 15;

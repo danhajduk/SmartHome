@@ -13,10 +13,11 @@
 #include "RF24Mesh.h"
 #include <SPI.h>
 #include "wifi.h"
-#include "Ethernet/src/Ethernet.h"
+
 
 // SmartHome Lib Includes
-#include "config.h"
+#include "SmartHome/config.h"
+
 class MasterUnit
 {
 	private:
@@ -36,14 +37,16 @@ class MasterUnit
 	public:
 		MasterUnit();
 		void init();
-		bool writeMesh (const void* data, uint8_t msg_type, size_t size);
+		bool writeMesh (const void* data, uint8_t msg_type, size_t size, char node);
 		void update();
 		void DHCP();
 		bool readUnits();
-
-		bool sendCMD(char nodeID);
-		char setNew ();
+		bool sendCMD(char nodeID, char cmd);
 		bool checkDev(char nodeID);
+
+
+		char setNew ();
+		
 
 		// Variables
 		bool _DEBUG;
@@ -51,6 +54,6 @@ class MasterUnit
 		int data_type ;
 		uint16_t _from;
 		// Constants
-
+		//headr_stat hdrType;
 };
 #endif

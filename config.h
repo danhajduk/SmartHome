@@ -1,7 +1,21 @@
 /************************************************************************/
-/*                                                                      */
+/*  General configurations and declarations                             */
 /************************************************************************/
 
-// header types
-#define ping 'C'
-#define reconect 'R'
+
+// Global Configurations
+enum headr_stat
+{
+	ping,
+	reconect,
+	command,
+	stat,
+	batt
+};
+
+enum commands
+{
+	On,
+	Off,
+	devStat
+};
