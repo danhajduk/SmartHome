@@ -16,7 +16,7 @@
 #include "RF24Network.h"
 #include "RF24Mesh.h"
 #include <SPI.h>
-#include <LCD5110_Graph.h>
+#include "LCD5110_Graph/LCD5110_Graph.h"
 #include "wifi.h"
 
 // SmartHome Lib Includes

@@ -16,7 +16,7 @@ extern unsigned char TinyFont[];	// Tine font pointer
 Boiler::Boiler(int pin ,float Rev , String Last )
 {
 	_pin = pin;
-	//RF24 radio1 (7,8);
+	RF24 radio1 (7,8);
 	dev.setDevice(_pin);					// Set Device Output (on/off)
 	turnOff();
 }
@@ -24,7 +24,7 @@ Boiler::Boiler(int pin ,float Rev , String Last )
 /***************************************************************************************
 	Class Boiler
 	void init () 
-	Turn On Boiler
+	Initialize boiler
 /***************************************************************************************/
 void Boiler::init( char nodeID, bool onLevel)
 {
