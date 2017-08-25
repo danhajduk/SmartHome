@@ -211,4 +211,14 @@ bool Boiler::writeMesh (const void* data, uint8_t msg_type, size_t size)
 	return true;
 }
 
+void Boiler::doPing()
+/***************************************************************************************
+	Class Boiler
+	void doPing ()
+	Ping to Master
+/***************************************************************************************/
+{
+	writeMesh(00,ping,1);
+}
+
 

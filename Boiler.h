@@ -24,7 +24,7 @@
 #include "TimerOne.h"
 #include "timeSet.h"
 #include "Arduino.h"
-
+#include "config.h"
 
 class Boiler 
 {
@@ -82,6 +82,7 @@ class Boiler
 		void updateBoiler();
 		void backLight (bool On );
 		bool writeMesh (const void* data, uint8_t msg_type, size_t size);
+		void doPing();
 };
 
 
