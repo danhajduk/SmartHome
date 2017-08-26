@@ -14,9 +14,11 @@
 #include <SPI.h>
 #include "wifi.h"
 
+#include <Ethernet.h>
+
 
 // SmartHome Lib Includes
-#include "SmartHome/config.h"
+#include <config.h>
 
 class MasterUnit
 {
@@ -33,7 +35,14 @@ class MasterUnit
 		RF24Network network{radio};							// Init RF24 Network
 		RF24Mesh mesh {radio, network};						// Init RF24 Mesh
 		
+		byte mac[6] = {
+			0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x02
+		};
+		IPAddress ip{192, 168, 1, 177};
+		EthernetServer srv {23};
+
 		void _printData();
+	
 	public:
 		MasterUnit();
 		void init();
@@ -46,6 +55,10 @@ class MasterUnit
 
 
 		char setNew ();
+		void setName();
+		bool getIpCommand();
+		void sendStat();
+
 		
 
 		// Variables

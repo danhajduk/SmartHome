@@ -39,10 +39,13 @@ void MasterUnit::init()
 	
 
 	_printData();
+	
+	Ethernet.begin(mac,ip);
+	srv.begin();
+	if (_DEBUG) Serial.print(F("Connected to local ethernet at :"));
+	if (_DEBUG) Serial.println(Ethernet.localIP());
 
-	/***********************
-	TBD : init Ethernet
-	************************/
+	
 
 	if (_DEBUG) Serial.println(F("******** Init  finished *********"));
 }
@@ -187,4 +190,14 @@ bool MasterUnit::checkDev(char nodeID)
 /***************************************************************************************/
 {
 	writeMesh(00,ping,1,nodeID);
+}
+
+bool MasterUnit::getIpCommand()
+/***************************************************************************************
+	Class MasterUnit
+	void getIpCommand 
+	gets input from eternet if available
+/***************************************************************************************/
+{
+return false;
 }

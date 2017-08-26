@@ -4,6 +4,8 @@
 
 
 // Global Configurations
+#ifndef GLobalConfig
+#define GLobalConfig
 enum headr_stat
 {
 	ping,
@@ -19,3 +21,4 @@ enum commands
 	Off,
 	devStat
 };
+#endif
